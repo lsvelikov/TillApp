@@ -1,0 +1,19 @@
+h2 {
+    text-align: center;
+    margin: 2em 0;
+}
+
+#input {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#password {
+    width: 14em;
+    border-radius: 2em;
+    background-color: #3fa290;
+    text-align: center;
+}
