@@ -1,0 +1,25 @@
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.site-header h1 {
+    margin-right: -2.3em;
+}
+
+.site-header nav ul {
+    display: flex;
+    align-items: center;
+}
+
+.site-header nav li {
+    list-style: none outside;
+    padding: 0 0.5em;
+}
+
+img {
+    width: 3.5em;
+    object-fit: contain;
+}

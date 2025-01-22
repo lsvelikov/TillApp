@@ -1,0 +1,14 @@
+.container {
+    max-width: 60em;
+    margin: 0 auto;
+  }
+
+.site-section {
+    padding: 2em;
+}
+
+.site-section.banner {
+    background: rgb(87, 141, 187);
+    color: white;
+    text-align: center;
+}
