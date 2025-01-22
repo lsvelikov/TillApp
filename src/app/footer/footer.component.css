@@ -1,0 +1,12 @@
+.site-footer {
+    color: white;
+}
+
+.footer-functions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-functions li {
+    list-style: none;
+}
