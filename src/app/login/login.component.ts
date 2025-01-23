@@ -20,7 +20,7 @@ export class LoginComponent {
     if (this.enteredPassword() === this.passwordId()) {
       this.enteredPassword.set('');
       this.login = true;
-      this.router.navigate([''], {
+      this.router.navigate(['tables'], {
         replaceUrl: true,
       })
     } else {
