@@ -1,0 +1,11 @@
+.home {
+    text-align: center;
+}
+ 
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    color: rgb(152, 86, 86);
+}
