@@ -1,8 +1,11 @@
 <h2>Please enter user password</h2>
 <form (ngSubmit)="onSubmit()">
     <p id="input">
-        <label for="password">Password</label>
-        <input type="text" id="password" name="password" [(ngModel)]="enteredPassword">
+
+
+        <app-number-input></app-number-input>
+        <!-- <label for="password">Password</label>
+        <input type="text" id="password" name="password" [(ngModel)]="enteredPassword"> -->
         <app-button title="Submit"></app-button>
     </p>
 </form>

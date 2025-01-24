@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
+import { NumberInputComponent } from "../number-input/number-input.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ButtonComponent, FormsModule],
+  imports: [ButtonComponent, FormsModule, NumberInputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
