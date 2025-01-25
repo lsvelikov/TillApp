@@ -14,6 +14,7 @@ import { NumberInputComponent } from "../number-input/number-input.component";
 export class LoginComponent {
   passwordId = signal('7070');
   enteredPassword = signal('');
+  text = signal<string>('Enter table number');
   login = false;
   private router = inject(Router);
 
@@ -30,5 +31,9 @@ export class LoginComponent {
         this.enteredPassword.set('');
       }, 1500);
     }
+  }
+
+  onClear() {
+    
   }
 }
