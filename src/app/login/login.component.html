@@ -5,10 +5,22 @@
                 <button type="reset" (click)="onClear()">X</button>
             </span></p>
     </div>
+    
+    <div id="numbers">
+        <ul>
+            @for (number of numbers; track number.id) {
+                <li>
+                    <app-number [number]="number" (click)="onClick(number)"></app-number>
+                </li>
+            }
+        </ul>
+    </div>
+    
+    
     <form (ngSubmit)="onSubmit()">
         <p id="input">
-            <app-number-input></app-number-input>
             <app-button title="Submit"></app-button>
         </p>
     </form>
 </div>
+

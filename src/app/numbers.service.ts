@@ -1,8 +1,5 @@
 import { Injectable } from "@angular/core";
-import { NUMBERS_VALUES } from "../numbers-values";
-
-
-
+import { NUMBERS_VALUES } from "./numbers-values";
 
 @Injectable({
     providedIn: 'root',
