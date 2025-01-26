@@ -8,6 +8,7 @@
 }
 
 .site-section.banner {
+    min-height: 30em;
     background: rgb(87, 141, 187);
     color: white;
     /* text-align: center; */
