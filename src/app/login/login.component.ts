@@ -17,34 +17,55 @@ export class LoginComponent {
   private numbersService = inject(NumbersService);
   numbers = this.numbersService.numbers;
   passwordId = signal('7070');
-  enteredPassword = signal<string>('');
-  text = signal<string>('Enter table number');
-  login = false;
+  currentNumber = signal<string>('');
+  star = signal('');
+  text = signal<string>('Enter password');
+  counter = 0;
   private router = inject(Router);
 
   onSubmit() {
-    
-    // if (this.enteredPassword() === this.passwordId()) {
-    //   this.enteredPassword.set('');
-    //   this.login = true;
-    //   this.router.navigate(['tables'], {
-    //     replaceUrl: true,
-    //   })
-    // } else {
-    //   this.enteredPassword.set('Please enter valid password!');
-    //   setTimeout(() => {
-    //     this.enteredPassword.set('');
-    //   }, 1500);
-    // }
+
+    if (this.currentNumber() === this.passwordId()) {
+      this.currentNumber.set('');
+      this.star.set('');
+      this.router.navigate(['tables'], {
+        replaceUrl: true,
+      })
+    } else {
+      this.star.set('Please enter valid password!');
+      setTimeout(() => {
+        this.currentNumber.set('');
+        this.star.set('');
+        this.counter = 0;
+      }, 1500);
+    }
   }
 
-  onClick(number: {id: string; value: string;}) {
-    this.enteredPassword.set(this.enteredPassword() + number.value);
-    console.log(this.enteredPassword());
-    
+  onClick(number: { id: string; value: string; }) {
+    if (number.value === '<') {
+      this.currentNumber.set(this.currentNumber().slice(0, - 1));
+      this.star.set(this.star().slice(0, -1));
+      this.counter--;
+      
+
+      if (this.counter <= 0) {
+        this.text.set('Enter password');
+        this.counter = 0;
+      }
+    } else {
+      if(this.counter > 8) {
+        return;
+      }
+      this.currentNumber.set(this.currentNumber() + number.value);
+      this.star.set(this.star() + '*');
+      this.counter++;
+
+    }
   }
 
   onClear() {
-
+    this.counter = 0;
+    this.currentNumber.set('');
+    this.star.set('');
   }
 }
