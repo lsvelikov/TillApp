@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BackButtonDirective } from '../back-button.directive';
 
 @Component({
