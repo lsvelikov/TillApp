@@ -23,5 +23,8 @@
                 <app-button title="Submit"></app-button>
             </p>
         </form>
+        @if(error()) {
+            <p id="error">{{ error() }}</p>
+        }
     </div>
 </div>

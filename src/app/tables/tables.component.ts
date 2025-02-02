@@ -32,15 +32,18 @@ export class TablesComponent {
     } else {
       if ((number.value === '0' && this.counter === 0) || (number.value === '.' && this.counter === 0)) {
         this.error.set("Table number cannot start with '0' or '.' !!!");
+        this.clearError();
         return;
       }
       if(+this.currentNumber() < 1000) {
         if(+(this.currentNumber() + number.value) >= 1000 || this.currentNumber().length > 7) {
           this.error.set("Table number cannot be bigger than 1000 and more than 7 digits !!!"); 
+          this.clearError();
           return;
         }
         if(this.currentNumber().includes('.') && number.value === '.') {
           this.error.set("Table number cannot contain two decimal points !!!");
+          this.clearError();
           return;
         }
         this.currentNumber.set(this.currentNumber() + number.value);
@@ -48,6 +51,12 @@ export class TablesComponent {
       }
     }
     
+  }
+
+  clearError() {
+    setTimeout(() => {
+      this.error.set('');
+    }, 3000);
   }
 
   onSubmit() {

@@ -53,3 +53,7 @@ ul li {
     display: inline-block;
     font-size: 16px;
 }
+
+#error {
+    max-width: 11.8em;
+}
