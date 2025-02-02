@@ -10,8 +10,8 @@
             "port": 33060,
             "driver": "MySQL",
             "name": "MySQL Local",
-            "username": "root",
             "database": "till",
+            "username": "root",
             "password": "",
             "connectionTimeout": 30
         }

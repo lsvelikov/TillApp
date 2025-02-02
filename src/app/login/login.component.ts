@@ -24,7 +24,7 @@ export class LoginComponent {
   private router = inject(Router);
 
   onSubmit() {
-
+    
     if (this.currentNumber() === this.passwordId()) {
       this.currentNumber.set('');
       this.star.set('');
@@ -59,7 +59,6 @@ export class LoginComponent {
       this.currentNumber.set(this.currentNumber() + number.value);
       this.star.set(this.star() + '*');
       this.counter++;
-
     }
   }
 

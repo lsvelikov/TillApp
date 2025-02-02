@@ -3,11 +3,12 @@ import { TableComponent } from "./table/table.component";
 import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [TableComponent, NumberComponent, ButtonComponent],
+  imports: [TableComponent, NumberComponent, ButtonComponent, FormsModule],
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css'
 })
@@ -18,7 +19,6 @@ export class TablesComponent {
   counter = 0;
   currentNumber = signal<string>('');
   error = signal<string>('');
-  
 
   onClick(number: { id: string; value: string; }) {
     if (number.value === '<') {
@@ -50,7 +50,6 @@ export class TablesComponent {
         this.counter++;
       }
     }
-    
   }
 
   clearError() {
@@ -60,7 +59,9 @@ export class TablesComponent {
   }
 
   onSubmit() {
-    
+    this.currentNumber.set('');
+    this.counter = 0;
+     
   }
 
   onClear() {
