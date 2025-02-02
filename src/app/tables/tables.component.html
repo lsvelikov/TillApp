@@ -3,6 +3,12 @@
         <app-table></app-table>
     </div>
     <div class="table-input">
+        <div class="login-table">
+            <p>@if(counter <= 0) { {{ tableInput() }} } 
+                @else { {{ currentNumber() }} } <span>
+                    <button type="reset" (click)="onClear()">X</button>
+                    </span></p>
+        </div>
         <div id="numbers">
             <ul>
                 @for (number of numbers; track number.id) {

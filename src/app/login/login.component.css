@@ -13,16 +13,9 @@ h2 {
     gap: 0.5em;
 }
 
-#password {
-    width: 14em;
-    border-radius: 2em;
-    background-color: #3ab39d;
-}
-
 .login-table {
     border: 2px solid white;
     text-align: center; 
-    
 }
 
 .login-table p {

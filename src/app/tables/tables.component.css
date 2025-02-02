@@ -7,6 +7,28 @@
     text-align: center;
 }
 
+.login-table {
+    border: 2px solid white;
+    text-align: center; 
+}
+
+.login-table p {
+    min-width: 11.8em;
+}
+
+.login-table span {
+    border: 1px solid white;
+    border-radius: 2em;
+    background: rgb(162, 153, 153);
+    margin-left: 0.7em;
+    padding: 0.3em;
+}
+
+.login-table span button {
+    color: white;
+    all: unset;
+}
+
 #numbers {
     max-width: 11.8em;
     margin: 0.8em 0;
