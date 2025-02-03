@@ -11,3 +11,5 @@ CREATE TABLE IF NOT EXISTS tables (
     number varchar(255),
     primary key(ID)
 )
+
+USE TILL;

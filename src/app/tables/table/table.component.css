@@ -1,0 +1,21 @@
+.table-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+#items {
+    max-width: 14.8em;
+    margin: 0.8em 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul li {
+    margin: 0.145em;
+}

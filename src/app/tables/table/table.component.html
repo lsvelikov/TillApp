@@ -1,1 +1,15 @@
-<p>table works!</p>
+<div class="table-main">
+    <div class="table-content">
+        <p>table works!</p>
+    </div>
+    <div id="items">
+        <ul>
+            @for (item of items; track item.id) {
+            <li>
+                <app-item [item]="item" (click)="onClick(item)"></app-item>
+            </li>
+            }
+        </ul>
+    </div>
+</div>
+

@@ -4,6 +4,7 @@ import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tables',
@@ -19,6 +20,7 @@ export class TablesComponent {
   counter = 0;
   currentNumber = signal<string>('');
   error = signal<string>('');
+  private router = inject(Router);
 
   onClick(number: { id: string; value: string; }) {
     if (number.value === '<') {
@@ -61,6 +63,10 @@ export class TablesComponent {
   onSubmit() {
     this.currentNumber.set('');
     this.counter = 0;
+
+    this.router.navigate(['table'], {
+      replaceUrl: true,
+    })
      
   }
 
