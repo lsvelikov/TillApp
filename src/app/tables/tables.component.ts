@@ -5,6 +5,7 @@ import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tables',
@@ -21,6 +22,7 @@ export class TablesComponent {
   currentNumber = signal<string>('');
   error = signal<string>('');
   private router = inject(Router);
+  private httpClient = inject(HttpClient);
 
   onClick(number: { id: string; value: string; }) {
     if (number.value === '<') {

@@ -4,8 +4,9 @@
 }
 
 #items {
-    max-width: 14.8em;
+    max-width: 14.3em;
     margin: 0.8em 0;
+    border: 2px solid white;
 }
 
 ul {
