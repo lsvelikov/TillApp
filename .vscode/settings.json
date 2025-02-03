@@ -2,18 +2,18 @@
     "sqltools.connections": [
         {
             "mysqlOptions": {
-                "authProtocol": "xprotocol",
+                "authProtocol": "default",
                 "enableSsl": "Disabled"
             },
             "previewLimit": 50,
             "server": "localhost",
-            "port": 33060,
+            "port": 3306,
             "driver": "MySQL",
             "name": "MySQL Local",
             "database": "till",
             "username": "root",
-            "password": "",
-            "connectionTimeout": 30
+            "connectionTimeout": 30,
+            "askForPassword": true
         }
     ]
 }
