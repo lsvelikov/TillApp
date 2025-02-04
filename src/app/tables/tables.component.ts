@@ -1,20 +1,19 @@
-import { Component, inject, signal } from '@angular/core';
-import { TableComponent } from "./table/table.component";
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [TableComponent, NumberComponent, ButtonComponent, FormsModule],
+  imports: [NumberComponent, ButtonComponent, FormsModule],
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css'
 })
-export class TablesComponent {
+export class TablesComponent implements OnInit {
   private numbersService = inject(NumbersService);
   numbers = this.numbersService.numbers;
   tableInput = signal<string>('Enter table number');
@@ -22,7 +21,19 @@ export class TablesComponent {
   currentNumber = signal<string>('');
   error = signal<string>('');
   private router = inject(Router);
-  private httpClient = inject(HttpClient);
+  data: any[] = [];
+  private dataService = inject(DataService);
+
+  ngOnInit(): void {
+    this.dataService.getData().subscribe(
+      (response) => {
+        this.data = response;  
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
 
   onClick(number: { id: string; value: string; }) {
     if (number.value === '<') {

@@ -13,3 +13,8 @@ CREATE TABLE IF NOT EXISTS tables (
 )
 
 USE TILL;
+
+INSERT INTO tables (number)
+VALUES ('56');
+
+TRUNCATE TABLE tables;
