@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Mimi2010',
+  password: '',
   database: 'till',
 });
 
