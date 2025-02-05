@@ -17,8 +17,7 @@ export class TableComponent {
     console.log(item.id);
     console.log(item.name);
     console.log(item.value);
-    
-    
+        
     
   }
 }

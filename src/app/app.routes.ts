@@ -21,6 +21,12 @@ export const routes: Routes = [
         path: 'tables',
         component: TablesComponent,
         title: 'Tables',
+        children: [
+            {
+                path: './',
+                component: TablesComponent,
+            }
+        ]
     },
     {
         path: 'table',

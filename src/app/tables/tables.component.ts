@@ -3,7 +3,7 @@ import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -23,11 +23,12 @@ export class TablesComponent implements OnInit {
   private router = inject(Router);
   data: any[] = [];
   private dataService = inject(DataService);
+  route: ActivatedRoute | null | undefined;
 
   ngOnInit(): void {
     this.dataService.getData().subscribe(
       (response) => {
-        this.data = response;  
+        this.data = response;
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -39,7 +40,7 @@ export class TablesComponent implements OnInit {
     if (number.value === '<') {
       this.currentNumber.set(this.currentNumber().slice(0, - 1));
       this.counter--;
-      
+
       if (this.counter <= 0) {
         this.tableInput.set('Enter table number');
         this.counter = 0;
@@ -50,13 +51,13 @@ export class TablesComponent implements OnInit {
         this.clearError();
         return;
       }
-      if(+this.currentNumber() < 1000) {
-        if(+(this.currentNumber() + number.value) >= 1000 || this.currentNumber().length > 7) {
-          this.error.set("Table number cannot be bigger than 1000 and more than 7 digits !!!"); 
+      if (+this.currentNumber() < 1000) {
+        if (+(this.currentNumber() + number.value) >= 1000 || this.currentNumber().length > 7) {
+          this.error.set("Table number cannot be bigger than 1000 and more than 7 digits !!!");
           this.clearError();
           return;
         }
-        if(this.currentNumber().includes('.') && number.value === '.') {
+        if (this.currentNumber().includes('.') && number.value === '.') {
           this.error.set("Table number cannot contain two decimal points !!!");
           this.clearError();
           return;
@@ -74,13 +75,26 @@ export class TablesComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.currentNumber());
+    
+    const data = { number: this.currentNumber() };
+
+    this.dataService.insertData(data).subscribe(response => {
+      console.log('Data inserted:', response);
+    }, error => {
+      console.error('Error:', error);
+    });
+
     this.currentNumber.set('');
     this.counter = 0;
 
-    this.router.navigate(['table'], {
-      replaceUrl: true,
+    // this.router.navigate(['./'], { relativeTo: this.route });
+
+
+    this.router.navigate(['tables'], {
+      replaceUrl: true
     })
-     
+
   }
 
   onClear() {
