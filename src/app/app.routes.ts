@@ -23,7 +23,7 @@ export const routes: Routes = [
         title: 'Tables',
         children: [
             {
-                path: './',
+                path: '',
                 component: TablesComponent,
             }
         ]

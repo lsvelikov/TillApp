@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, input, OnInit, signal } from '@angular/core';
 import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
@@ -24,16 +24,11 @@ export class TablesComponent implements OnInit {
   data: any[] = [];
   private dataService = inject(DataService);
   route: ActivatedRoute | null | undefined;
+  private cdRef = inject(ChangeDetectorRef);
+
 
   ngOnInit(): void {
-    this.dataService.getData().subscribe(
-      (response) => {
-        this.data = response;
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
+    this.fetchTables();
   }
 
   onClick(number: { id: string; value: string; }) {
@@ -75,30 +70,47 @@ export class TablesComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.currentNumber());
-    
-    const data = { number: this.currentNumber() };
+    const currentUrl = this.router.url;
 
-    this.dataService.insertData(data).subscribe(response => {
-      console.log('Data inserted:', response);
-    }, error => {
-      console.error('Error:', error);
-    });
+    console.log(this.dataService.getData());
+
+    const exsistingNumber = this.data.some((t) => t.number === (this.currentNumber()));
+
+    if (!exsistingNumber) {
+      const data = { number: this.currentNumber() };
+
+      this.dataService.insertData(data).subscribe(response => {
+        console.log('Data inserted:', response);
+      }, error => {
+        console.error('Error:', error);
+      });
+
+    }
 
     this.currentNumber.set('');
     this.counter = 0;
 
-    // this.router.navigate(['./'], { relativeTo: this.route });
-
-
-    this.router.navigate(['tables'], {
+    this.router.navigate([currentUrl], {
       replaceUrl: true
     })
+
+    this.fetchTables();
 
   }
 
   onClear() {
     this.counter = 0;
     this.currentNumber.set('');
+  }
+
+  private fetchTables() {
+    return this.dataService.getData().subscribe(
+      (response) => {
+        this.data = response;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
 }

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'http://localhost:4000/api/data'; 
+  private apiUrl = 'http://localhost:4000/api/data';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getData(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
@@ -18,3 +18,4 @@ export class DataService {
     return this.http.post<any>(this.apiUrl, data);
   }
 }
+
