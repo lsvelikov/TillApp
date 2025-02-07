@@ -1,11 +1,11 @@
 <div class="tables-main">
     <div>
-        <div>
+        <div class="table-number">
             @if(data.length > 0) {
             <ul>
                 @for (item of data; track item.id) {
                 <li>
-                    Table {{ item.number }}
+                    <a routerLink="/table">Table {{ item.number }}</a>
                 </li>
                 }
             </ul>
