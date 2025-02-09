@@ -35,9 +35,9 @@ app.get('/api/data', (req, res) => {
 app.post('/api/data', (req, res) => {
   const { number } = req.body; 
 
-  const query = 'INSERT INTO tables (number) VALUES (?)';
+  const query = 'INSERT INTO tables (number, totalSum) VALUES (?, ?)';
   
-  db.query(query, [number], (err, results) => {
+  db.query(query, [number, totalSum], (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {

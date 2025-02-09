@@ -18,6 +18,7 @@ export class TablesComponent implements OnInit {
   numbers = this.numbersService.numbers;
   tableInput = signal<string>('Enter table number');
   counter = 0;
+  sum = signal<number>(0.00);
   currentNumber = signal<string>('');
   error = signal<string>('');
   private router = inject(Router);
@@ -70,24 +71,24 @@ export class TablesComponent implements OnInit {
   }
 
   onSubmit() {
-    this.fetchTables();
 
     const currentUrl = this.router.url;
-
-    console.log(this.dataService.getData());
 
     const exsistingNumber = this.data.some((t) => t.number === (this.currentNumber()));
 
     if (!exsistingNumber) {
-      const data = { number: this.currentNumber() };
+      const data = { number: this.currentNumber(), totalSum: this.sum() };
 
       this.dataService.insertData(data).subscribe(response => {
         console.log('Data inserted:', response);
+        
       }, error => {
         console.error('Error:', error);
       });
 
     }
+
+    this.fetchTables();
 
     this.currentNumber.set('');
     this.counter = 0;
@@ -105,7 +106,7 @@ export class TablesComponent implements OnInit {
   private fetchTables() {
     return this.dataService.getData().subscribe(
       (response) => {
-        this.data = response;
+        this.data = response;      
       },
       (error) => {
         console.error('Error fetching data:', error);

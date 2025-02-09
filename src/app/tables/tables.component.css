@@ -10,10 +10,10 @@
 }
 
 .table-number li {
-    min-width: 7.5em;
+    min-width: 11.5em;
     background:  #4754b2;
     border: 2px solid white;
-    text-align: center;
+    text-align: start;
     padding: 0.3em 0.3em;
 }
 
@@ -24,9 +24,18 @@
     flex-grow: 1;
 }
 
+.table-number a span {
+   float: right;
+}
+
 .table-number li:hover {
     color: rgb(39, 31, 31);
     background: rgb(102, 144, 181);
+}
+
+.no-tables {
+    font-size: 2em;
+    text-align: center;
 }
 
 .table-input {
