@@ -81,7 +81,6 @@ export class TablesComponent implements OnInit {
 
       this.dataService.insertData(data).subscribe(response => {
         console.log('Data inserted:', response);
-        
       }, error => {
         console.error('Error:', error);
       });
@@ -106,7 +105,9 @@ export class TablesComponent implements OnInit {
   private fetchTables() {
     return this.dataService.getData().subscribe(
       (response) => {
-        this.data = response;      
+        this.data = response; 
+        this.data.sort((a, b) => +a.number - +b.number);  
+        console.log(this.data);
       },
       (error) => {
         console.error('Error fetching data:', error);
