@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ItemComponent } from "../../item/item.component";
 import { ItemsService } from '../../items.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   private itemService = inject(ItemsService);
   items = this.itemService.items;
   private route = inject(ActivatedRoute);
+  tableNumber = signal<string>('');
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -21,6 +22,7 @@ export class TableComponent implements OnInit {
       const number = params['number'];
       const sum = params['sum'];
       console.log(id, number, sum);
+      this.tableNumber.set(number);
     });
   }
 
