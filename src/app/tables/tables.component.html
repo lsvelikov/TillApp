@@ -4,8 +4,8 @@
             @if(data.length > 0) {
             <ul>
                 @for (item of data; track item.id) {
-                <li routerLink="/table">
-                    <a>Table {{ item.number }}<span>{{ sum() }}€</span></a>
+                <li routerLink="/table" [queryParams]="{id: item.id, number: item.number, sum: item.totalSum}">
+                    <a>Table {{ item.number }}<span>{{ item.totalSum }}€</span></a>
                 </li>
                 }
             </ul>

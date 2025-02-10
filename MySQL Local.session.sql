@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS tables (
     id INT AUTO_INCREMENT,
     number varchar(255),
+    totalSum varchar(255),
     primary key(ID)
 )
 
@@ -14,8 +15,8 @@ CREATE TABLE IF NOT EXISTS tables (
 
 USE TILL;
 
-INSERT INTO tables (number)
-VALUES ('56');
+INSERT INTO tables (number, totalSum)
+VALUES ('100', '45.5');
 
 TRUNCATE TABLE tables;
 

@@ -33,7 +33,7 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/data', (req, res) => {
-  const { number } = req.body; 
+  const { number, totalSum } = req.body; 
 
   const query = 'INSERT INTO tables (number, totalSum) VALUES (?, ?)';
   

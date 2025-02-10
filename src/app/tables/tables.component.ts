@@ -1,10 +1,12 @@
-import { ChangeDetectorRef, Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../data.service';
+import { Tables } from './tables.model';
+
 
 @Component({
   selector: 'app-tables',
@@ -18,15 +20,13 @@ export class TablesComponent implements OnInit {
   numbers = this.numbersService.numbers;
   tableInput = signal<string>('Enter table number');
   counter = 0;
-  sum = signal<number>(0.00);
+  sum = signal<string>('1.00');
   currentNumber = signal<string>('');
   error = signal<string>('');
   private router = inject(Router);
-  data: any[] = [];
+  data: Tables[] = [];
   private dataService = inject(DataService);
   route: ActivatedRoute | null | undefined;
-  private cdRef = inject(ChangeDetectorRef);
-
 
   ngOnInit(): void {
     this.fetchTables();
@@ -81,20 +81,24 @@ export class TablesComponent implements OnInit {
 
       this.dataService.insertData(data).subscribe(response => {
         console.log('Data inserted:', response);
+        console.log(data.totalSum);
+        
       }, error => {
         console.error('Error:', error);
       });
 
     }
 
-    this.fetchTables();
-
     this.currentNumber.set('');
     this.counter = 0;
 
-    this.router.navigate([currentUrl], {
-      replaceUrl: true
-    })
+    // this.router.navigate([currentUrl]);
+
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+
+    this.fetchTables();
   }
 
   onClear() {
