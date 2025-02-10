@@ -20,7 +20,7 @@ export class TablesComponent implements OnInit {
   numbers = this.numbersService.numbers;
   tableInput = signal<string>('Enter table number');
   counter = 0;
-  sum = signal<string>('1.00');
+  sum = signal<number>(0.00);
   currentNumber = signal<string>('');
   error = signal<string>('');
   private router = inject(Router);
@@ -81,8 +81,6 @@ export class TablesComponent implements OnInit {
 
       this.dataService.insertData(data).subscribe(response => {
         console.log('Data inserted:', response);
-        console.log(data.totalSum);
-        
       }, error => {
         console.error('Error:', error);
       });

@@ -47,5 +47,5 @@ app.post('/api/data', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('Server running on http://localhost:4000');
+  console.log(`Server running on http://localhost:${port}`);
 });
