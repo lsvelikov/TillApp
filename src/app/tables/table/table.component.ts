@@ -16,24 +16,29 @@ export class TableComponent implements OnInit {
   private route = inject(ActivatedRoute);
   tableNumber = signal<string>('');
   tableSum = signal<number>(0);
-  tableItems: { id:string, name: string, value: number } [] = [];
+  tableItems: { id:string, name: string, value: number, quantity: number } [] = [];
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       const number = params['number'];
       const sum = params['sum'];
-      console.log(id, number, sum);
       this.tableNumber.set(number);
       this.tableSum.set(sum);
     });
   }
 
-  onClick(item: { id: string; name: string; value: number }) {
-    console.log(item.id);
-    console.log(item.name);
-    console.log(item.value);
-    this.tableItems.push(item);
+  onClick(item: { id: string; name: string; value: number, quantity: number }) {
+  
+    const existingItem = this.tableItems.find((i) => i.id === item.id);
+
+    if(!existingItem) {
+      item.quantity = item.quantity + 1;
+      this.tableItems.push(item);
+    } else {
+      existingItem.quantity = existingItem.quantity + 1;
+    }
+    
     console.log(this.tableItems);
     
   }
