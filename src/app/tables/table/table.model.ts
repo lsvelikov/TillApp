@@ -1,12 +1,12 @@
 export interface Table {
     id: string;
-    number: string;
-    quantity: number;
+    tableNumber: string;
+    itemQuantity: number;
     items: {
         id: string;
         name: string;
         value: number;
     } [];
-    value: number;
+    itemValue: number;
     sum: number;
 }

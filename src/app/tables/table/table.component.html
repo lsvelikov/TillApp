@@ -1,6 +1,11 @@
 <div class="table-main">
     <div class="table-content">
         <p>Table {{ tableNumber() }}</p>
+        <ul>
+            @for(tableItem of tableItems; track tableItem.id) {
+            {{ tableItem.name }}   {{ tableItem.value }}€<br>
+            }
+        </ul>
     </div>
     <div id="items">
         <ul>
@@ -12,4 +17,3 @@
         </ul>
     </div>
 </div>
-

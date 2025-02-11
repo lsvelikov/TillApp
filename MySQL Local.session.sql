@@ -5,11 +5,18 @@ CREATE TABLE IF NOT EXISTS tables (
     primary key(ID)
 )
 
-DROP TABLE tables;
+CREATE TABLE IF NOT EXISTS items (
+    id INT AUTO_INCREMENT,
+    name VARCHAR(255),
+    value VARCHAR(255),
+    primary key(ID)
+)
+
+DROP TABLE items;
 
 USE TILL;
 
-INSERT INTO tables (number, totalSum)
-VALUES ('809', '45.57');
+INSERT INTO items (name, value)
+VALUES ('cola', 3.00);
 
-TRUNCATE TABLE tables;
+TRUNCATE TABLE items;

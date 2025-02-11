@@ -5,6 +5,7 @@ import { ITEM_VALUES } from "./items-values";
     providedIn: 'root'
 })
 export class ItemsService {
+   
     get items() {
         return ITEM_VALUES;
     }
