@@ -26,7 +26,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  onClick(item: {id: string; name: string; value: string}) {
+  onClick(item: {id: string; name: string; value: number}) {
     console.log(item.id);
     console.log(item.name);
     console.log(item.value);
