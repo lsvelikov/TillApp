@@ -31,7 +31,7 @@ export class TableComponent implements OnInit {
   onClick(item: { id: string; name: string; value: number, quantity: number }) {
   
     const existingItem = this.tableItems.find((i) => i.id === item.id);
-
+    
     if(!existingItem) {
       item.quantity = item.quantity + 1;
       this.tableItems.push(item);
