@@ -6,6 +6,7 @@
             {{ tableItem.quantity }}*  {{ tableItem.name }}  {{ tableItem.quantity * tableItem.value }}€<br>
             }
         </ul>
+        <p>Total sum: {{ tableSum() }}€</p>
     </div>
     <div id="items">
         <ul>

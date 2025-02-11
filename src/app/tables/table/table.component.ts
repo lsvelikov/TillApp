@@ -13,6 +13,7 @@ import { ItemsService } from '../../items.service';
 export class TableComponent implements OnInit {
   private itemService = inject(ItemsService);
   items = this.itemService.items;
+  tableId = signal<string>('');
   private route = inject(ActivatedRoute);
   tableNumber = signal<string>('');
   tableSum = signal<number>(0);
@@ -23,6 +24,7 @@ export class TableComponent implements OnInit {
       const id = params['id'];
       const number = params['number'];
       const sum = params['sum'];
+      this.tableId.set(id);
       this.tableNumber.set(number);
       this.tableSum.set(sum);
     });
@@ -38,8 +40,8 @@ export class TableComponent implements OnInit {
     } else {
       existingItem.quantity = existingItem.quantity + 1;
     }
-    
-    console.log(this.tableItems);
+
+    this.tableSum.set(+this.tableSum() + item.value);
     
   }
 }
