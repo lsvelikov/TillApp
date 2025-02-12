@@ -1,6 +1,7 @@
 .table-main {
     display: flex;
     justify-content: space-between;
+    min-height: 22.5em;
 }
 
 .table-content {
@@ -13,10 +14,16 @@
     font-size: 1.5em;
 }
 
+.sum {
+    position: absolute;
+    top: 19em;
+    left: 12.5em;
+}
+
 #items {
     max-width: 14.3em;
     margin: 0.8em 0;
-    border: 2px solid white;
+    border-left: 2px solid white;
 }
 
 ul {
