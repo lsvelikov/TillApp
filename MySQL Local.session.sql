@@ -19,4 +19,4 @@ USE TILL;
 INSERT INTO items (name, value)
 VALUES ('cola', 3.00);
 
-TRUNCATE TABLE items;
+TRUNCATE TABLE tables;

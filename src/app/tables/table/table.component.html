@@ -1,12 +1,12 @@
 <div class="table-main">
     <div class="table-content">
-        <p>Table {{ tableNumber() }}</p>
+        <p class="table-number">Table {{ tableNumber() }}</p>
         <ul>
             @for(tableItem of tableItems; track tableItem.id) {
             {{ tableItem.quantity }}*  {{ tableItem.name }}  {{ tableItem.quantity * tableItem.value }}€<br>
             }
         </ul>
-        <p>Total sum: {{ tableSum() }}€</p>
+        <p class="sum">Total sum: {{ tableSum() }}€</p>
     </div>
     <div id="items">
         <ul>

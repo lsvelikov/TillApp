@@ -3,6 +3,16 @@
     justify-content: space-between;
 }
 
+.table-content {
+    width: 75%;
+    padding: 1em;
+}
+
+.table-number, 
+.sum{
+    font-size: 1.5em;
+}
+
 #items {
     max-width: 14.3em;
     margin: 0.8em 0;
