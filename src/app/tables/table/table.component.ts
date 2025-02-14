@@ -2,11 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ItemComponent } from "../../item/item.component";
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../items.service';
+import { ButtonComponent } from "../../button/button.component";
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [ItemComponent],
+  imports: [ItemComponent, ButtonComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -42,6 +43,10 @@ export class TableComponent implements OnInit {
     }
 
     this.tableSum.set(+this.tableSum() + item.value);
+    
+  }
+
+  onSubmit() {
     
   }
 }

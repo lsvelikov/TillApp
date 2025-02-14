@@ -23,7 +23,7 @@
 #items {
     max-width: 14.3em;
     margin: 0.8em 0;
-    border-left: 2px solid white;
+    border: 2px solid white;
 }
 
 ul {
@@ -36,4 +36,10 @@ ul {
 
 ul li {
     margin: 0.145em;
+}
+
+.input {
+    text-align: center;
+    border-top: 2px solid white;
+    margin-top: -0.05em;
 }
