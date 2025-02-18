@@ -7,7 +7,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../data.service';
 import { Tables } from './tables.model';
 
-
 @Component({
   selector: 'app-tables',
   standalone: true,
@@ -72,29 +71,29 @@ export class TablesComponent implements OnInit {
 
   onSubmit() {
 
-    const currentUrl = this.router.url;
+    // const currentUrl = this.router.url;
 
-    const exsistingNumber = this.data.some((t) => t.number === (this.currentNumber()));
+    // const exsistingNumber = this.data.some((t) => t.number === (this.currentNumber()));
 
-    if (!exsistingNumber) {
-      const data = { number: this.currentNumber(), totalSum: this.sum() };
+    // if (!exsistingNumber) {
+    //   const data = { number: this.currentNumber(), totalSum: this.sum() };
 
-      this.dataService.insertData(data).subscribe(response => {
-        console.log('Data inserted:', response);
-      }, error => {
-        console.error('Error:', error);
-      });
+    //   this.dataService.insertData(data).subscribe(response => {
+    //     console.log('Data inserted:', response);
+    //   }, error => {
+    //     console.error('Error:', error);
+    //   });
 
-    }
+    // }
 
     this.currentNumber.set('');
     this.counter = 0;
 
-    // this.router.navigate([currentUrl]);
+    this.router.navigate(['/table']);
 
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentUrl]);
-    });
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([currentUrl]);
+    // });
 
     this.fetchTables();
   }
@@ -104,11 +103,15 @@ export class TablesComponent implements OnInit {
     this.currentNumber.set('');
   }
 
+  sendMessage() {
+    this.dataService.changeMessage(this.currentNumber());
+  }
+  
   private fetchTables() {
     return this.dataService.getData().subscribe(
       (response) => {
-        this.data = response; 
-        this.data.sort((a, b) => +a.number - +b.number);  
+        this.data = response;
+        this.data.sort((a, b) => +a.number - +b.number);
         console.log(this.data);
       },
       (error) => {

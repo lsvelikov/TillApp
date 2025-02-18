@@ -34,7 +34,7 @@
         </div>
         <form (ngSubmit)="onSubmit()">
             <p class="input">
-                <app-button title="Submit"></app-button>
+                <app-button (click)="sendMessage()" title="Submit"></app-button>
             </p>
         </form>
         @if(error()) {
