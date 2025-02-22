@@ -16,6 +16,7 @@ export class TableComponent implements OnInit {
   private itemService = inject(ItemsService);
   items = this.itemService.items;
   tableId = signal<string>('');
+  status = signal<string>('open');
   private route = inject(ActivatedRoute);
   private dataService = inject(DataService);
   router = inject(Router);
@@ -37,8 +38,6 @@ export class TableComponent implements OnInit {
       this.tableNumber.set(msg);
     });
 
-    console.log(this.tableNumber());
-    
   }
 
   onClick(item: { id: string; name: string; value: number, quantity: number }) {
@@ -53,6 +52,9 @@ export class TableComponent implements OnInit {
     }
 
     this.tableSum.set(+this.tableSum() + item.value);
+
+    // console.log(this.tableItems);
+
 
   }
 
@@ -72,8 +74,21 @@ export class TableComponent implements OnInit {
     //   sum = this.tableSum();
     //   console.log(sum);
 
+    console.log(this.tableItems);
+    
+    console.log(this.status());
+    
+    const tableData = { number: this.tableNumber(),items: this.tableItems, status: this.status(), totalSum: this.tableSum() };
 
-    //   this.router.navigate(['/tables']);
+    console.log(tableData);
+
+    this.dataService.insertTableData(tableData).subscribe(response => {
+      console.log('Data inserted:', response);
+    }, error => {
+      console.error('Error:', error);
+    });
+
+    this.router.navigate(['/tables']);
     // });
 
   }

@@ -112,7 +112,6 @@ export class TablesComponent implements OnInit {
       (response) => {
         this.data = response;
         this.data.sort((a, b) => +a.number - +b.number);
-        console.log(this.data);
       },
       (error) => {
         console.error('Error fetching data:', error);

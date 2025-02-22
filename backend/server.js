@@ -33,16 +33,28 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/data', (req, res) => {
-  const { number, totalSum } = req.body; 
+  const { number, items, status, totalSum } = req.body; 
 
-  const query = 'INSERT INTO tables (number, totalSum) VALUES (?, ?)';
+  const query = 'INSERT INTO tables (number, status, totalSum) VALUES (?, ?, ?)';
   
-  db.query(query, [number, totalSum], (err, results) => {
+  db.query(query, [number, status, totalSum], (err, result) => {
     if (err) {
       res.status(500).json({ error: err.message });
-    } else {
-      res.status(200).json({ message: 'Data inserted successfully!', id: results.insertId });
     }
+
+    const tableDataId = result.insertId;
+
+    items.forEach(item => {
+      const itemQuery = 'INSERT INTO items (tables_id, name, value, quantity) VALUES (?, ?, ?, ?)';
+      db.query(itemQuery, [tableDataId, item.name, item.value, item.quantity], (err) => {
+        if (err) {
+          return res.status(500).json({ error: 'Error inserting item into the items table' });
+        }
+      });
+    });
+
+    res.status(200).json({ message: 'Data submitted successfully' });
+
   });
 });
 

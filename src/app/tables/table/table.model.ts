@@ -1,12 +1,8 @@
+import { Item } from "../../item/item.model";
+
 export interface Table {
     id: string;
     tableNumber: string;
-    itemQuantity: number;
-    items: {
-        id: string;
-        name: string;
-        value: number;
-    } [];
-    itemValue: number;
+    status: string;
     sum: number;
 }
