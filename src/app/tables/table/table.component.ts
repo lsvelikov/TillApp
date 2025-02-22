@@ -88,7 +88,9 @@ export class TableComponent implements OnInit {
       console.error('Error:', error);
     });
 
-    this.router.navigate(['/tables']);
+    this.router.navigate(['/tables'], {
+      replaceUrl: true,
+    });
     // });
 
   }
