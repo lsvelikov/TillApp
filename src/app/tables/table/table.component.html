@@ -3,7 +3,7 @@
         <p class="table-number">Table {{ tableNumber() }}</p>
         <ul>
             @for(tableItem of tableItems; track tableItem.id) {
-            {{ tableItem.quantity }}*  {{ tableItem.name }}  {{ tableItem.quantity * tableItem.value }}€<br>
+            {{ tableItem.quantity }}* {{ tableItem.name }} {{ tableItem.quantity * tableItem.value }}€<br>
             }
         </ul>
         <p class="sum">Total sum: {{ tableSum() }}€</p>
@@ -16,10 +16,9 @@
             </li>
             }
         </ul>
-        <!-- <form (ngSubmit)="onSubmit()"> -->
-            <p class="input">
-                <app-button title="Submit" (click)="onSubmit()"></app-button>
-            </p>
-        <!-- </form> -->
+
+        <p class="input">
+            <app-button title="Submit" (click)="onSubmit()"></app-button>
+        </p>
     </div>
 </div>

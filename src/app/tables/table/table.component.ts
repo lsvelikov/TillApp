@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ItemComponent } from "../../item/item.component";
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ItemsService } from '../../items.service';
 import { ButtonComponent } from "../../button/button.component";
 import { DataService } from '../../data.service';
@@ -17,7 +17,6 @@ export class TableComponent implements OnInit {
   items = this.itemService.items;
   tableId = signal<string>('');
   status = signal<string>('open');
-  private route = inject(ActivatedRoute);
   private dataService = inject(DataService);
   router = inject(Router);
   tableNumber = signal<string>('');
@@ -25,14 +24,6 @@ export class TableComponent implements OnInit {
   tableItems: { id: string, name: string, value: number, quantity: number }[] = [];
 
   ngOnInit(): void {
-    // this.route.queryParams.subscribe(params => {
-    //   const id = params['id'];
-    //   const number = params['number'];
-    //   const sum = params['sum'];
-    //   this.tableId.set(id);
-    //   this.tableNumber.set(number);
-    //   this.tableSum.set(sum);
-    // });
 
     this.dataService.currentMessage.subscribe(msg => {
       this.tableNumber.set(msg);
@@ -53,34 +44,11 @@ export class TableComponent implements OnInit {
 
     this.tableSum.set(+this.tableSum() + item.value);
 
-    // console.log(this.tableItems);
-
-
   }
 
-  // changeQueryParam() {
-  //   this.router.navigate(['/tables'], {
-  //     relativeTo: this.route,
-  //     queryParams: { sum: this.tableSum() },
-  //     queryParamsHandling: 'merge', 
-  //   });
-  // }
-
   onSubmit() {
-    // this.route.queryParams.subscribe(params => {
-    //   const id = params['id'];
-    //   const number = params['number'];
-    //   let sum = params['sum'];
-    //   sum = this.tableSum();
-    //   console.log(sum);
-
-    console.log(this.tableItems);
-    
-    console.log(this.status());
     
     const tableData = { number: this.tableNumber(),items: this.tableItems, status: this.status(), totalSum: this.tableSum() };
-
-    console.log(tableData);
 
     this.dataService.insertTableData(tableData).subscribe(response => {
       console.log('Data inserted:', response);
@@ -91,7 +59,6 @@ export class TableComponent implements OnInit {
     this.router.navigate(['/tables'], {
       replaceUrl: true,
     });
-    // });
-
+  
   }
 }
