@@ -1,22 +1,24 @@
 CREATE TABLE IF NOT EXISTS tables (
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     number VARCHAR(255),
-    totalSum VARCHAR(255),
-    primary key(ID)
-)
+    status VARCHAR(255),
+    totalSum VARCHAR(255)
+) 
 
-CREATE TABLE IF NOT EXISTS items (
-    id INT AUTO_INCREMENT,
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tables_id INT,
     name VARCHAR(255),
-    value VARCHAR(255),
-    primary key(ID)
-)
+    value DECIMAL(10, 2),
+    quantity INT,
+    FOREIGN KEY (tables_id) REFERENCES tables(id)
+);
 
-DROP TABLE items;
+DROP TABLE tables;
 
 USE TILL;
 
 INSERT INTO items (name, value)
 VALUES ('cola', 3.00);
 
-TRUNCATE TABLE tables;
+TRUNCATE TABLE items;

@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'Mimi2010',
   database: 'till',
 });
 
@@ -29,6 +29,23 @@ app.get('/api/data', (req, res) => {
     } else {
       res.json(results);
     }
+  });
+});
+
+app.get('/api/data', (req, res) => {
+  const query = `
+    SELECT t.table_number, 
+           i.item_name, 
+           i.item_value, 
+           i.item_quantity, 
+           t.table_sum
+    FROM tables t
+    JOIN items i ON t.table_id = i.table_id
+  `;
+
+  connection.query(query, (err, rows) => {
+    if (err) throw err;
+    res.json(rows);
   });
 });
 

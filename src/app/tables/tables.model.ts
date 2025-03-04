@@ -1,6 +1,8 @@
 export interface Tables {
-quantity: any;
     id: string;
     number: string;
+    item_name: string;
+    item_value: number;
+    item_quantity: number;
     totalSum: number;
 }

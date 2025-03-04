@@ -1,12 +1,30 @@
 <div class="table-main">
     <div class="table-content">
+        @if(selectedTable) {
+        <h3>Table {{ selectedTable.number }}</h3>
+        @for(row of tableData; track row.id) {
+            <div>
+                <strong>Table Number:</strong> {{ row.number }}
+              </div>
+              <div>
+                <strong>Item:</strong> {{ row.item_name }} - Value: {{ row.item_value }} - Quantity: {{ row.item_quantity }}
+              </div>
+              <div>
+                <strong>Table Sum:</strong> {{ row.table_sum }}
+              </div>
+              <hr />
+        }    
+        <p>Sum: {{ selectedTable.totalSum }} €</p>
+        } @else {
         <p class="table-number">Table {{ tableNumber() }}</p>
         <ul>
             @for(tableItem of tableItems; track tableItem.id) {
             {{ tableItem.quantity }}* {{ tableItem.name }} {{ tableItem.quantity * tableItem.value }}€<br>
             }
         </ul>
-        <p class="sum">Total sum: {{ tableSum() }}€</p>
+        <p class="sum">Total sum: {{ tableSum() }} €</p>
+        }
+
     </div>
     <div id="items">
         <ul>

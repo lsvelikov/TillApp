@@ -71,29 +71,10 @@ export class TablesComponent implements OnInit {
 
   onSubmit() {
 
-    // const currentUrl = this.router.url;
-
-    // const exsistingNumber = this.data.some((t) => t.number === (this.currentNumber()));
-
-    // if (!exsistingNumber) {
-    //   const data = { number: this.currentNumber(), totalSum: this.sum() };
-
-    //   this.dataService.insertData(data).subscribe(response => {
-    //     console.log('Data inserted:', response);
-    //   }, error => {
-    //     console.error('Error:', error);
-    //   });
-
-    // }
-
     this.currentNumber.set('');
     this.counter = 0;
 
     this.router.navigate(['/table']);
-
-    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    //   this.router.navigate([currentUrl]);
-    // });
 
     this.fetchTables();
   }
@@ -103,6 +84,12 @@ export class TablesComponent implements OnInit {
     this.currentNumber.set('');
   }
 
+  onSelectTable(table: any) {
+    this.dataService.setSelectedTable(table);
+    console.log(table);
+    
+  }
+  
   sendMessage() {
     this.dataService.changeMessage(this.currentNumber());
   }
