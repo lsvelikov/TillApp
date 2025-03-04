@@ -42,22 +42,15 @@ export class TableComponent implements OnInit {
       this.tableNumber.set(msg);
     });
 
-    this.dataService.getData().subscribe(
-      (response) => {
-        this.data = response;
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
-
     const subscription = this.dataService.selectedTable.subscribe(tbl => {
       this.tableNumber.set(tbl.number);
       this.tableSum.set(tbl.totalSum);
 
-    })
 
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+      this.destroyRef.onDestroy(() => subscription.unsubscribe());
+    });
+
+    
   }
 
   onClick(item: { id: string; name: string; value: number, quantity: number }) {
@@ -103,8 +96,6 @@ export class TableComponent implements OnInit {
   }
 
   private resetTable() {
-    this.tableNumber.set('');
-    this.tableSum.set(0);
     for (const item of this.tableItems) {
       item.quantity = 0;
     }

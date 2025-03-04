@@ -1,16 +1,16 @@
-import { AfterContentInit, AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { Tables } from './tables.model';
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [NumberComponent, ButtonComponent, FormsModule, RouterLink],
+  imports: [NumberComponent, ButtonComponent, FormsModule],
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css'
 })
@@ -76,7 +76,10 @@ export class TablesComponent implements OnInit {
     this.currentNumber.set('');
     this.counter = 0;
 
-    this.router.navigate(['/table/:id']);
+    console.log(this.currentNumber());
+    
+
+    this.router.navigate(['/table', this.currentNumber()]);
 
     this.fetchTables();
   }
