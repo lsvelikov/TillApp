@@ -22,7 +22,7 @@ export const routes: Routes = [
         title: 'Tables',
     },
     {
-        path: 'table',
+        path: 'table/:id',
         component: TableComponent,
         title: 'Table'
     },

@@ -4,7 +4,7 @@
             @if(data.length > 0) {
             <ul>
                 @for (table of data; track table.id) {
-                <li routerLink="/table" (click)="onSelectTable(table)">
+                <li (click)="onSelectTable(table)">
                     <a>Table {{ table.number }}<span>{{ table.totalSum }}€</span></a>
                 </li>
                 }

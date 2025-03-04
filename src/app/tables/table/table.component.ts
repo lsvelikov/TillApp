@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ItemComponent } from "../../item/item.component";
 import { Router } from '@angular/router';
 import { ItemsService } from '../../items.service';
@@ -6,6 +6,7 @@ import { ButtonComponent } from "../../button/button.component";
 import { DataService } from '../../data.service';
 import { BackActionService } from '../../back-action.sevice';
 import { Subscription } from 'rxjs';
+import { Table } from './table.model';
 
 @Component({
   selector: 'app-table',
@@ -25,25 +26,38 @@ export class TableComponent implements OnInit {
   tableNumber = signal<string>('');
   tableSum = signal<number>(0);
   tableData: any[] = [];
+  data: Table[] = [];
   tableItems: { id: string, name: string, value: number, quantity: number }[] = [];
   backActionService = inject(BackActionService);
   private backActionSubscription: Subscription = new Subscription;
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
 
     this.backActionSubscription = this.backActionService.backAction$.subscribe(() => {
-      this.clearQuantities();
+      this.resetTable();
     });
 
     this.dataService.currentMessage.subscribe(msg => {
       this.tableNumber.set(msg);
     });
-    
-    this.dataService.selectedTable.subscribe(tbl => {
+
+    this.dataService.getData().subscribe(
+      (response) => {
+        this.data = response;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+
+    const subscription = this.dataService.selectedTable.subscribe(tbl => {
       this.tableNumber.set(tbl.number);
       this.tableSum.set(tbl.totalSum);
-      
+
     })
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   onClick(item: { id: string; name: string; value: number, quantity: number }) {
@@ -63,23 +77,18 @@ export class TableComponent implements OnInit {
 
   onSubmit() {
 
-    
     const tableData = { number: this.tableNumber(), items: this.tableItems, status: this.status(), totalSum: this.tableSum() };
 
-    const existingTable = this.tableItems.find((t) => t.id === this.tableNumber());
-
-    console.log(existingTable);
+    console.log(this.data);
     
-    
-    if(!existingTable) {
-      this.dataService.insertTableData(tableData).subscribe(response => {
-        console.log('Data inserted:', response); 
-      }, error => {
-        console.error('Error:', error);
-      });
-    }
 
-    this.clearQuantities();
+    this.dataService.insertTableData(tableData).subscribe(response => {
+      console.log('Data inserted:', response);
+    }, error => {
+      console.error('Error:', error);
+    });
+
+    this.resetTable();
 
     this.router.navigate(['/tables'], {
       replaceUrl: true,
@@ -93,8 +102,10 @@ export class TableComponent implements OnInit {
     }
   }
 
-  private clearQuantities() {
-    for(const item of this.tableItems) {
+  private resetTable() {
+    this.tableNumber.set('');
+    this.tableSum.set(0);
+    for (const item of this.tableItems) {
       item.quantity = 0;
     }
   }

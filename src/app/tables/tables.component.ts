@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
@@ -61,6 +61,8 @@ export class TablesComponent implements OnInit {
         this.counter++;
       }
     }
+    console.log(this.currentNumber());
+    
   }
 
   clearError() {
@@ -74,7 +76,7 @@ export class TablesComponent implements OnInit {
     this.currentNumber.set('');
     this.counter = 0;
 
-    this.router.navigate(['/table']);
+    this.router.navigate(['/table/:id']);
 
     this.fetchTables();
   }
@@ -86,8 +88,7 @@ export class TablesComponent implements OnInit {
 
   onSelectTable(table: any) {
     this.dataService.setSelectedTable(table);
-    console.log(table);
-    
+    this.router.navigate(['table', table.number]);
   }
   
   sendMessage() {
