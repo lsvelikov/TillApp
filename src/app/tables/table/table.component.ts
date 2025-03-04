@@ -38,7 +38,12 @@ export class TableComponent implements OnInit {
     this.dataService.currentMessage.subscribe(msg => {
       this.tableNumber.set(msg);
     });
-
+    
+    this.dataService.selectedTable.subscribe(tbl => {
+      this.tableNumber.set(tbl.number);
+      this.tableSum.set(tbl.totalSum);
+      
+    })
   }
 
   onClick(item: { id: string; name: string; value: number, quantity: number }) {
@@ -61,11 +66,14 @@ export class TableComponent implements OnInit {
     
     const tableData = { number: this.tableNumber(), items: this.tableItems, status: this.status(), totalSum: this.tableSum() };
 
-    const existingTable = this.tableData.find((t) => t.number === this.tableNumber());
+    const existingTable = this.tableItems.find((t) => t.id === this.tableNumber());
+
+    console.log(existingTable);
+    
     
     if(!existingTable) {
       this.dataService.insertTableData(tableData).subscribe(response => {
-        console.log('Data inserted:', response);
+        console.log('Data inserted:', response); 
       }, error => {
         console.error('Error:', error);
       });
