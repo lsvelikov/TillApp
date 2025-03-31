@@ -3,14 +3,14 @@ import { NumbersService } from '../numbers.service';
 import { NumberComponent } from "../number/number.component";
 import { ButtonComponent } from "../button/button.component";
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../data.service';
 import { Tables } from './tables.model';
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [NumberComponent, ButtonComponent, FormsModule],
+  imports: [NumberComponent, ButtonComponent, FormsModule, RouterLink],
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css'
 })

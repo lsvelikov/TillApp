@@ -50,7 +50,6 @@ export class TableComponent implements OnInit {
       this.destroyRef.onDestroy(() => subscription.unsubscribe());
     });
 
-    
   }
 
   onClick(item: { id: string; name: string; value: number, quantity: number }) {
@@ -71,9 +70,6 @@ export class TableComponent implements OnInit {
   onSubmit() {
 
     const tableData = { number: this.tableNumber(), items: this.tableItems, status: this.status(), totalSum: this.tableSum() };
-
-    console.log(this.data);
-    
 
     this.dataService.insertTableData(tableData).subscribe(response => {
       console.log('Data inserted:', response);
